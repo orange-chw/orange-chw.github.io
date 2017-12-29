@@ -87,12 +87,12 @@
 <meta property="og:site_name" content="chw">
 <meta property="og:description" content="##问题最近在开发中有个需求，需要app退到后台继续执行每间隔60s调用心跳接口的任务。在此，不讨论为何如此设计，只论实现。 app前台运行实现方案程序运行时，只需要运用NSTimer类即可实现该功能。具体操作如下 _timer = [NSTimer scheduledTimerWithTimeInterval:60.0">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/12/18/2017-12-18/2017-12-18/2017.12.18_1.png">
-<meta property="og:updated_time" content="2017-12-29T01:06:11.000Z">
+<meta property="og:image" content="http://yoursite.com/2017/12/18/2017-12-18/2017-12-18/2017.12.18_1.jpg">
+<meta property="og:updated_time" content="2017-12-29T01:12:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS 关于app后台任务的问题">
 <meta name="twitter:description" content="##问题最近在开发中有个需求，需要app退到后台继续执行每间隔60s调用心跳接口的任务。在此，不讨论为何如此设计，只论实现。 app前台运行实现方案程序运行时，只需要运用NSTimer类即可实现该功能。具体操作如下 _timer = [NSTimer scheduledTimerWithTimeInterval:60.0">
-<meta name="twitter:image" content="http://yoursite.com/2017/12/18/2017-12-18/2017-12-18/2017.12.18_1.png">
+<meta name="twitter:image" content="http://yoursite.com/2017/12/18/2017-12-18/2017-12-18/2017.12.18_1.jpg">
 
 
 
@@ -323,7 +323,7 @@
 <h1 id="app后台运行实现方案"><a href="#app后台运行实现方案" class="headerlink" title="app后台运行实现方案"></a>app后台运行实现方案</h1><p>首先，来了解下app的后台运行的机制。</p>
 <p>在开发中如果没有进行特殊的设置，app在进入后台后，系统会将分配给app的资源进行回收，此时会暂停所有正在执行的计时器以及正在执行的业务逻辑，app会处于挂起状态，再过一会app就会被kill。</p>
 <p>由于我们在接单状态下会使用持续定位功能。因此在此模块，我们运用持续定位的backgorund模式来实现了app长期处于backgound状态。（此方法在ios9.0以上可用）</p>
-<p>1.先配置项目target的backgound模式<br><br>将Location updates和 background fetch选项打勾<br><img src="2017-12-18/2017.12.18_1.png" alt=""><br>2.由于项目使用的是高德地图，在此用高德地图为代码示例。我们此处指使用定位，未使用地图，因此使用的是高德的AMapLocationManager类。示例代码如下</p>
+<p>1.先配置项目target的backgound模式<br><br>将Location updates和 background fetch选项打勾<br><img src="2017-12-18/2017.12.18_1.jpg" alt=""><br>2.由于项目使用的是高德地图，在此用高德地图为代码示例。我们此处指使用定位，未使用地图，因此使用的是高德的AMapLocationManager类。示例代码如下</p>
 <pre><code>_locationManager = [[AMapLocationManager alloc]init];
 _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
 _locationManager.distanceFilter = 30;
