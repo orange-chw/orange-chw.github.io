@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/03/29/Swizzling的使用/1.JPG">
 <meta property="og:image" content="http://yoursite.com/2018/03/29/Swizzling的使用/2.JPG">
 <meta property="og:image" content="http://yoursite.com/2018/03/29/Swizzling的使用/3.JPG">
-<meta property="og:updated_time" content="2018-03-29T06:02:45.000Z">
+<meta property="og:updated_time" content="2018-03-29T06:13:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swizzling的使用">
 <meta name="twitter:description" content="##前言在oc的runtime机制内有一类方法是可以用来实现类间的方法替换。解决了我们实际开发中诸多常规手段所无法解决的问题。关于Method Swizzling，这里有一篇介绍基本用法的文章 ##场景最近出于某种原因，我翻阅了MJRefresh的源码，其中该库就使用了方法交换策略。在其UICollectionView和UITableView的类别里我发现该库使用了以下代码。于是分析了下其为何如此">
@@ -315,7 +315,7 @@
 
       
         <p>##前言<br>在oc的runtime机制内有一类方法是可以用来实现类间的方法替换。解决了我们实际开发中诸多常规手段所无法解决的问题。关于<a href="http://nshipster.com/method-swizzling/" target="_blank" rel="external">Method Swizzling</a>，这里有一篇介绍基本用法的文章</p>
-<p>##场景<br>最近出于某种原因，我翻阅了MJRefresh的源码，其中该库就使用了方法交换策略。<br>在其<code>UICollectionView</code>和<code>UITableView</code>的类别里我发现该库使用了以下代码。于是分析了下其为何如此做的原因。<br>使用源码如下：<br><img src="1.JPG" alt=""><br><img src="2.JPG" alt=""><br><img src="3.JPG" alt=""></p>
+<p>##场景<br>最近出于某种原因，我翻阅了MJRefresh的源码，其中该库就使用了方法交换策略。<br>在其<code>UICollectionView</code>和<code>UITableView</code>的类别里我发现该库使用了以下代码。于是分析了下其为何如此做的原因。<br>使用源码如下：<br><img src="/2018/03/29/Swizzling的使用/1.JPG" alt=""><br><img src="/2018/03/29/Swizzling的使用/2.JPG" alt=""><br><img src="/2018/03/29/Swizzling的使用/3.JPG" alt=""></p>
 <p>##分析<br>这里先介绍下<code>load</code>的方法的执行方式。<code>load</code>方法是NSObject的方法，NSObject则是oc里大部分类的基类。只要类被添加到runtime中，load的方法均会被调用，而且只会自动被调用一次（除非你自行有调用了次方法，不过一般不会这样做）。其调用方式是执行顺序是 类 -&gt; 子类 -&gt;分类 ，例如A继承与B会先执行B的<code>load</code>再执行A的<code>load</code>，如果分类实现了<code>load</code>方法也是一样会先执行类的<code>load</code>再执行此类的分类里的<code>load</code>方法。因此，此方法是不会被覆盖。</p>
 <p>MJRefresh为了替换oc类<code>tableview</code>和<code>collectionview</code>的reloadData以达到调用其自定义的<code>mj_reloadDataBlock</code>，因此实现了分别定义了类别<code>UITableView(MJRefresh)</code>和<code>UICollectionView(MJRefresh)</code>并重写了类方法<code>load</code>。在<code>load</code>方法里MJRefresh做了一件事情就是使用runtime里的<code>method_exchangeImplementations</code>方法来实现用<code>mj_reloadData</code>替换<code>tableview</code>和<code>collectionview</code>里的<code>reloadData</code>方法。<br>在<code>mj_reloadData</code>的方法里我们看到其为了该方法能既能执行原有的<code>reloadData</code>方法又能执行<code>mj_reloadDataBlock</code>，他先调用了<code>[self mj_reloadData]</code>然后有调用了<code>mj_reloadDataBlock</code>。由于方法被交换过，因此此处的<code>[self mj_reloadData]</code>会调用<code>reloadData</code>方法并不会造成死循环，同时也达到了其目的调用原有的<code>reloadData</code>方法。</p>
 <p>但是这里我也发现了一个问题，既然方法交换了，如果你调用了<code>[self mj_reloadData]</code>方法则会变成调用<code>reloadData</code>方法，那样岂不是会达到效果？在这里MJRefresh为了不让你这样做，则是将<code>mj_reloadData</code>做为私有方法，没有公开API，你是无法直接调用到的（当然你想调用还是调用的到的，这里就不多做讨论）。</p>
