@@ -79,17 +79,35 @@
 
 
 
-<meta name="description" content="学习、记录、分享">
+<meta name="description" content="前言最近有个需求需要对项目内的一个视频播放器做小屏转全屏。由于项目内的播放器是自定义的view用openGL的渲染方式来做的一个自定义的播放器，因此大小屏需要自己做一个切换效果。 ps:这里只对app的设置是仅支持竖屏但是播放器可以旋转横屏的情况来做处理，如果app本身支持横竖屏就没有这方面的处理了。 #分析大小屏切换的条件：  播放器屏幕设置一个切换按钮，点击的时候进行切换 旋转手机的时候进行切">
 <meta name="keywords" content="iOS,blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="chw">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义全屏转场动画">
+<meta property="og:url" content="http://yoursite.com/2018/05/29/自定义全屏转场动画/index.html">
 <meta property="og:site_name" content="chw">
-<meta property="og:description" content="学习、记录、分享">
+<meta property="og:description" content="前言最近有个需求需要对项目内的一个视频播放器做小屏转全屏。由于项目内的播放器是自定义的view用openGL的渲染方式来做的一个自定义的播放器，因此大小屏需要自己做一个切换效果。 ps:这里只对app的设置是仅支持竖屏但是播放器可以旋转横屏的情况来做处理，如果app本身支持横竖屏就没有这方面的处理了。 #分析大小屏切换的条件：  播放器屏幕设置一个切换按钮，点击的时候进行切换 旋转手机的时候进行切">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/自定义全屏转场动画/自定义全屏转场动画/1.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/自定义全屏转场动画/自定义全屏转场动画/2.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/自定义全屏转场动画/自定义全屏转场动画/3.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/自定义全屏转场动画/自定义全屏转场动画/4.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/自定义全屏转场动画/自定义全屏转场动画/5.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/自定义全屏转场动画/自定义全屏转场动画/6.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/自定义全屏转场动画/自定义全屏转场动画/7.gif">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/自定义全屏转场动画/自定义全屏转场动画/8.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/自定义全屏转场动画/自定义全屏转场动画/9.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/自定义全屏转场动画/自定义全屏转场动画/10.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/自定义全屏转场动画/自定义全屏转场动画/11.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/自定义全屏转场动画/自定义全屏转场动画/12.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/自定义全屏转场动画/自定义全屏转场动画/13.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/自定义全屏转场动画/自定义全屏转场动画/14.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/自定义全屏转场动画/自定义全屏转场动画/15.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/29/自定义全屏转场动画/自定义全屏转场动画/16.gif">
+<meta property="og:updated_time" content="2018-06-12T07:19:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="chw">
-<meta name="twitter:description" content="学习、记录、分享">
+<meta name="twitter:title" content="自定义全屏转场动画">
+<meta name="twitter:description" content="前言最近有个需求需要对项目内的一个视频播放器做小屏转全屏。由于项目内的播放器是自定义的view用openGL的渲染方式来做的一个自定义的播放器，因此大小屏需要自己做一个切换效果。 ps:这里只对app的设置是仅支持竖屏但是播放器可以旋转横屏的情况来做处理，如果app本身支持横竖屏就没有这方面的处理了。 #分析大小屏切换的条件：  播放器屏幕设置一个切换按钮，点击的时候进行切换 旋转手机的时候进行切">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/29/自定义全屏转场动画/自定义全屏转场动画/1.png">
 
 
 
@@ -119,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/29/自定义全屏转场动画/"/>
 
 
 
 
 
-  <title>chw</title>
+  <title>自定义全屏转场动画 | chw</title>
   
 
 
@@ -144,8 +162,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -228,9 +245,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -260,9 +277,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/29/自定义全屏转场动画/" itemprop="url">自定义全屏转场动画</a></h1>
+          <h1 class="post-title" itemprop="name headline">自定义全屏转场动画</h1>
         
 
         <div class="post-meta">
@@ -312,9 +327,7 @@
       
 
       
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近有个需求需要对项目内的一个视频播放器做小屏转全屏。由于项目内的播放器是自定义的view用openGL的渲染方式来做的一个自定义的播放器，因此大小屏需要自己做一个切换效果。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近有个需求需要对项目内的一个视频播放器做小屏转全屏。由于项目内的播放器是自定义的view用openGL的渲染方式来做的一个自定义的播放器，因此大小屏需要自己做一个切换效果。</p>
 <p><strong>ps:这里只对app的设置是仅支持竖屏但是播放器可以旋转横屏的情况来做处理，如果app本身支持横竖屏就没有这方面的处理了。</strong></p>
 <p>#分析<br>大小屏切换的条件：</p>
 <ul>
@@ -356,8 +369,6 @@
 <h1 id="最后实现出来的效果如下"><a href="#最后实现出来的效果如下" class="headerlink" title="最后实现出来的效果如下"></a>最后实现出来的效果如下</h1><p><img src="自定义全屏转场动画/16.gif" alt=""></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这次实现过程比较麻烦的是转场动效这块。主要是因为present一个横屏和dissmiss一个竖屏的时候需要设置相应的动画初始值。而横竖屏的mask转换present和dissmiss一触发就系统就开始做，这时候如果你要自定义实现竖屏转横屏的旋转放大和横屏转竖屏的旋转缩小就需要先初始化view的属性让它处于原先的状态然后再在执行动画的block里让其复原就可以达到这个效果。</p>
 
-          
-        
       
     </div>
     
@@ -374,137 +385,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/29/Swizzling的使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chw">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/myheader.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chw">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/29/Swizzling的使用/" itemprop="url">Swizzling的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-29T11:32:44+08:00">
-                2018-03-29
-              </time>
+              <a href="/2018/03/29/Swizzling的使用/" rel="next" title="Swizzling的使用">
+                <i class="fa fa-chevron-left"></i> Swizzling的使用
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在oc的runtime机制内有一类方法是可以用来实现类间的方法替换。解决了我们实际开发中诸多常规手段所无法解决的问题。关于<a href="http://nshipster.com/method-swizzling/" target="_blank" rel="external">Method Swizzling</a>，这里有一篇介绍基本用法的文章</p>
-<h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>最近出于某种原因，我翻阅了MJRefresh的源码，其中该库就使用了方法交换策略。<br>在其<code>UICollectionView</code>和<code>UITableView</code>的类别里我发现该库使用了以下代码。于是分析了下其为何如此做的原因。<br>使用源码如下：<br><img src="/2018/03/29/Swizzling的使用/1.JPG" alt=""><br><img src="/2018/03/29/Swizzling的使用/2.JPG" alt=""><br><img src="/2018/03/29/Swizzling的使用/3.JPG" alt=""></p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>这里先介绍下<code>load</code>的方法的执行方式。<code>load</code>方法是NSObject的方法，NSObject则是oc里大部分类的基类。只要类被添加到runtime中，load的方法均会被调用，而且只会自动被调用一次（除非你自行有调用了次方法，不过一般不会这样做）。其调用方式是执行顺序是 类 -&gt; 子类 -&gt;分类 ，例如A继承与B会先执行B的<code>load</code>再执行A的<code>load</code>，如果分类实现了<code>load</code>方法也是一样会先执行类的<code>load</code>再执行此类的分类里的<code>load</code>方法。因此，此方法是不会被覆盖。</p>
-<p>MJRefresh为了替换oc类<code>tableview</code>和<code>collectionview</code>的reloadData以达到调用其自定义的<code>mj_reloadDataBlock</code>，因此实现了分别定义了类别<code>UITableView(MJRefresh)</code>和<code>UICollectionView(MJRefresh)</code>并重写了类方法<code>load</code>。在<code>load</code>方法里MJRefresh做了一件事情就是使用runtime里的<code>method_exchangeImplementations</code>方法来实现用<code>mj_reloadData</code>替换<code>tableview</code>和<code>collectionview</code>里的<code>reloadData</code>方法。<br>在<code>mj_reloadData</code>的方法里我们看到其为了该方法能既能执行原有的<code>reloadData</code>方法又能执行<code>mj_reloadDataBlock</code>，他先调用了<code>[self mj_reloadData]</code>然后有调用了<code>mj_reloadDataBlock</code>。由于方法被交换过，因此此处的<code>[self mj_reloadData]</code>会调用<code>reloadData</code>方法并不会造成死循环，同时也达到了其目的调用原有的<code>reloadData</code>方法。</p>
-<p>但是这里我也发现了一个问题，既然方法交换了，如果你调用了<code>[self mj_reloadData]</code>方法则会变成调用<code>reloadData</code>方法，那样岂不是会达到效果？在这里MJRefresh为了不让你这样做，则是将<code>mj_reloadData</code>做为私有方法，没有公开API，你是无法直接调用到的（当然你想调用还是调用的到的，这里就不多做讨论）。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>从此处设计，能看出来<code>method_exchangeImplementations</code>的runtime方法的使用场景以及如何运用的思路。在此做了分析记录，也为以后如果碰到一些类似场景提供一些新的解决思路和方式。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -514,280 +416,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/18/2017-12-18/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chw">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/myheader.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chw">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/18/2017-12-18/" itemprop="url">iOS 关于app后台任务的问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-18T16:39:02+08:00">
-                2017-12-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>最近在开发中有个需求，需要app退到后台继续执行每间隔60s调用心跳接口的任务。在此，不讨论为何如此设计，只论实现。</p>
-<h1 id="app前台运行实现方案"><a href="#app前台运行实现方案" class="headerlink" title="app前台运行实现方案"></a>app前台运行实现方案</h1><p>程序运行时，只需要运用NSTimer类即可实现该功能。<br>具体操作如下</p>
-<pre><code>_timer = [NSTimer scheduledTimerWithTimeInterval:60.0 
-                                          target:self 
-                                            selector:@selector(heartBeatClick)
-                                            userInfo:nil
-                                             repeats:YES];
-</code></pre><p><a href="http://www.jianshu.com/p/3ccdda0679c1" target="_blank" rel="external">了解NSTimer使用方法点击这里</a></p>
-<h1 id="app后台运行实现方案"><a href="#app后台运行实现方案" class="headerlink" title="app后台运行实现方案"></a>app后台运行实现方案</h1><p>首先，来了解下app的后台运行的机制。</p>
-<p>在开发中如果没有进行特殊的设置，app在进入后台后，系统会将分配给app的资源进行回收，此时会暂停所有正在执行的计时器以及正在执行的业务逻辑，app会处于挂起状态，再过一会app就会被kill。</p>
-<p>由于我们在接单状态下会使用持续定位功能。因此在此模块，我们运用持续定位的backgorund模式来实现了app长期处于backgound状态。（此方法在ios9.0以上可用）</p>
-<p>1.先配置项目target的backgound模式<br><br>将Location updates和 background fetch选项打勾<br><img src="/2017/12/18/2017-12-18/image1.JPG" alt=""><br>2.由于项目使用的是高德地图，在此用高德地图为代码示例。我们此处指使用定位，未使用地图，因此使用的是高德的AMapLocationManager类。示例代码如下</p>
-<pre><code>_locationManager = [[AMapLocationManager alloc]init];
-_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-_locationManager.distanceFilter = 30;
-_locationManager.delegate = self;
-_locationManager.locatingWithReGeocode = YES;
-_locationManager.pausesLocationUpdatesAutomatically = NO;
-//此处的关键部分在于_locationManager要打开允许后台刷新定位
-//此字段是在iOS 9.0开放的，因此要在此加上版本判定
-if ([[UIDevice currentDevice].systemVersion floatValue] &gt; 9.0) {
-    _locationManager.allowsBackgroundLocationUpdates = YES;
-}
-</code></pre><p>3.通过_locationManager开启持续定位</p>
-<pre><code>[_locationManager  startUpdatingLocation]
-</code></pre><p>之后，在持续定位模式下面，app在进入后台后会保持background模式，计时器会继续运行不会被暂停中断。<br><br>此方法的缺点是耗电，app在开启持续定位手机的耗电会比较快。但是项目的接单设计必须要用户持续定位，以方便用户能在用户端看到技术员的最新位置，因此此处正好也符合了app后台间隔1分钟持续调用心跳包的需求。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>app的后台模式不仅使用后台定位能实现，还有一系列系统级别的后台功能可以使app退到后台后变成background模式。例如后台播放音乐，视频等。<br>至于其它的方法目前暂时没有发现，如果有新的发现会在此文档后续更新。</p>
-<p>ps：个人感觉这个心跳接口跟在线统计的模块功能接口后台设计的不是很合理。由于我没涉及到接口的编写设计，这里不做过多的讨论。</p>
-
-          
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/27/终于有了个人的独立博客/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chw">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/myheader.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="chw">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/27/终于有了个人的独立博客/" itemprop="url">终于有了个人的独立博客</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T17:16:56+08:00">
-                2017-11-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="胡乱一气，乱说一通"><a href="#胡乱一气，乱说一通" class="headerlink" title="胡乱一气，乱说一通"></a>胡乱一气，乱说一通</h2><p>在我学生时代的时候，写作一直是我的诟病。因为我不爱看文学作品，不喜欢写日记，不喜欢动笔写作。但是我却很喜欢数学，物理，喜欢做逻辑题目，典型的理工男。因此，弄一个博客写作放在以前，我肯定是想都不会去想。</p>
-<p>但是自从从事研发行业后，我渐渐发现了写作也不是那么无聊的事情。就是一种感觉，觉得写点东西能够抒发自己内心的情绪，能记录自己的成长。于是我开始着手搭建了自己的博客，希望自己能一个月一篇的出货量，一年一次工作成长总结（虽然不知道能不能做到）但是我就是这么想的于是也准备这样做了。搭建博客完成算是我的第一步，虽然没啥技术含量，但是我还是很开心！</p>
-<h2 id="博客搭建的技术参考"><a href="#博客搭建的技术参考" class="headerlink" title="博客搭建的技术参考"></a>博客搭建的技术参考</h2><p>我博客搭建是采用hexo + github + coding来的方式来做的。<br><strong>hexo</strong>是一款基于Node.js的静态博客框架；<br><strong>gitbub</strong>国外知名项目管理托管平台；<br><strong>coding</strong>国内知名项目托管平台。<br> 主要思路就是用<strong>hexo</strong>搭建静态本地静态博客后，将其部署到<strong>github</strong>和<strong>coding</strong>上面。</p>
-<p> 具体教程请参考它:<a href="http://www.jianshu.com/p/13e64c9e2295" target="_blank" rel="external">Mac上搭建基于GitHub的Hexo博客</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -795,6 +428,10 @@ if ([[UIDevice currentDevice].systemVersion floatValue] &gt; 9.0) {
 
 
           
+
+  
+
+
 
         </div>
         
@@ -815,8 +452,17 @@ if ([[UIDevice currentDevice].systemVersion floatValue] &gt; 9.0) {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -878,6 +524,22 @@ if ([[UIDevice currentDevice].systemVersion floatValue] &gt; 9.0) {
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#由于present本身带有系统动画，所以我们要自定义present转场动画以达到大小屏切换的动画效果。"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">由于present本身带有系统动画，所以我们要自定义present转场动画以达到大小屏切换的动画效果。</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在转场动画类实现完后，在你要present的控制器里你需要实现以下代码来控制present和dissmiss的自定义动画"><span class="nav-number">2.</span> <span class="nav-text">在转场动画类实现完后，在你要present的控制器里你需要实现以下代码来控制present和dissmiss的自定义动画</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后实现出来的效果如下"><span class="nav-number">3.</span> <span class="nav-text">最后实现出来的效果如下</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1018,6 +680,10 @@ if ([[UIDevice currentDevice].systemVersion floatValue] &gt; 9.0) {
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
