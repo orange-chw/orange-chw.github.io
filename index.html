@@ -316,7 +316,7 @@
           
             <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近有个需求需要对项目内的一个视频播放器做小屏转全屏。由于项目内的播放器是自定义的view用openGL的渲染方式来做的一个自定义的播放器，因此大小屏需要自己做一个切换效果。</p>
 <p><strong>ps:这里只对app的设置是仅支持竖屏但是播放器可以旋转横屏的情况来做处理，如果app本身支持横竖屏就没有这方面的处理了。</strong></p>
-<p>#分析<br>大小屏切换的条件：</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>大小屏切换的条件：</p>
 <ul>
 <li>播放器屏幕设置一个切换按钮，点击的时候进行切换</li>
 <li>旋转手机的时候进行切换</li>
@@ -326,7 +326,7 @@
 <li>设置屏幕的横竖屏</li>
 <li>全屏布局</li>
 </ol>
-<p>#屏幕横竖屏切换<br>首先，你需要在AppDelegate里定义一个UIInterfaceOrientationMask的变量初始化设置为UIInterfaceOrientationMaskPortrait，重写支持的旋转方向的系统方法。具体做法如下:</p>
+<h1 id="屏幕横竖屏切换"><a href="#屏幕横竖屏切换" class="headerlink" title="屏幕横竖屏切换"></a>屏幕横竖屏切换</h1><p>首先，你需要在AppDelegate里定义一个UIInterfaceOrientationMask的变量初始化设置为UIInterfaceOrientationMaskPortrait，重写支持的旋转方向的系统方法。具体做法如下:</p>
 <p><img src="/2018/05/29/自定义全屏转场动画/1.png" alt=""><br><img src="/2018/05/29/自定义全屏转场动画/2.png" alt=""></p>
 <p>接下来就是触发横屏的处理了。在你需要全屏的页面将orientationMask设置为UIInterfaceOrientationMaskLandscape|UIInterfaceOrientationMaskPortrait,然后再重写一下两个方法即可<br><img src="/2018/05/29/自定义全屏转场动画/3.png" alt=""><br>这样这个页面可以支持横竖屏切换。<br>如果你需要自动横竖屏切换只需要监听UIDeviceOrientationDidChangeNotification通知事件，然后在转屏通知触发事件里重新布局即可。</p>
 <p>手动切换横竖屏目前我知道的有两种办法</p>
@@ -335,8 +335,7 @@
 <li>采用present一个横屏控制器的方法。这个方法比较保险。因此采用此方法做横竖屏切换。由于present的控制器我们需要它仅支持横屏效果，所以你需要在这个控制器里将屏幕设置为只能横屏，做法跟上面的自动切换横屏的设置是相识只是把UIInterfaceOrientationMaskPortrait去掉，代码如下：<br><img src="/2018/05/29/自定义全屏转场动画/5.png" alt=""><br><img src="/2018/05/29/自定义全屏转场动画/6.png" alt=""><br>由于你需要present的控制器是横屏的所以你在该控制器里要重写preferredInterfaceOrientationForPresentation方法并返回一个它present后的方向，这样你present后这个控制器的方向就会朝你设置的方向。具体效果如下<br><img src="/2018/05/29/自定义全屏转场动画/7.gif" alt=""></li>
 </ol>
 <p>这样你需要的横竖屏转换就完成了。</p>
-<p>#大小屏的切换动画</p>
-<h4 id="由于present本身带有系统动画，所以我们要自定义present转场动画以达到大小屏切换的动画效果。"><a href="#由于present本身带有系统动画，所以我们要自定义present转场动画以达到大小屏切换的动画效果。" class="headerlink" title="由于present本身带有系统动画，所以我们要自定义present转场动画以达到大小屏切换的动画效果。"></a>由于present本身带有系统动画，所以我们要自定义present转场动画以达到大小屏切换的动画效果。</h4><ol>
+<h1 id="大小屏的切换动画"><a href="#大小屏的切换动画" class="headerlink" title="大小屏的切换动画"></a>大小屏的切换动画</h1><h4 id="由于present本身带有系统动画，所以我们要自定义present转场动画以达到大小屏切换的动画效果。"><a href="#由于present本身带有系统动画，所以我们要自定义present转场动画以达到大小屏切换的动画效果。" class="headerlink" title="由于present本身带有系统动画，所以我们要自定义present转场动画以达到大小屏切换的动画效果。"></a>由于present本身带有系统动画，所以我们要自定义present转场动画以达到大小屏切换的动画效果。</h4><ol>
 <li>创建一个CustomerTransition类并遵守UIViewControllerAnimatedTransitioning协议<br><img src="/2018/05/29/自定义全屏转场动画/8.png" alt=""><br><img src="/2018/05/29/自定义全屏转场动画/9.png" alt=""></li>
 <li>在你全屏的横屏控制器里出时候一个CustomerTransition类型的对象,并设置转场代理和转场类型。然后实现转场代理的两个方法<br><img src="/2018/05/29/自定义全屏转场动画/10.png" alt=""><br><img src="/2018/05/29/自定义全屏转场动画/11.png" alt=""></li>
 <li>在CustomerTransition.m里实现动画效果</li>
@@ -354,7 +353,7 @@
 </li>
 </ol>
 <h1 id="最后实现出来的效果如下"><a href="#最后实现出来的效果如下" class="headerlink" title="最后实现出来的效果如下"></a>最后实现出来的效果如下</h1><p><img src="/2018/05/29/自定义全屏转场动画/16.gif" alt=""></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这次实现过程比较麻烦的是转场动效这块。主要是因为present一个横屏和dissmiss一个竖屏的时候需要设置相应的动画初始值。而横竖屏的mask转换present和dissmiss一触发就系统就开始做，这时候如果你要自定义实现竖屏转横屏的旋转放大和横屏转竖屏的旋转缩小就需要先初始化view的属性让它处于原先的状态然后再在执行动画的block里让其复原就可以达到这个效果。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这次实现过程比较麻烦的是转场动效这块。主要是因为present一个横屏和dissmiss一个竖屏的时候需要设置相应的动画初始值。而横竖屏的mask转换在present和dissmiss一触发就系统就开始做，这时候如果你要自定义实现竖屏转横屏的旋转放大和横屏转竖屏的旋转缩小就需要先初始化view的属性让它处于原先的状态然后再在执行动画的block里让其复原就可以达到这个效果。</p>
 
           
         
