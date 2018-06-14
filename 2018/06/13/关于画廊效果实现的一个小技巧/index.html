@@ -79,18 +79,26 @@
 
 
 
-<meta name="description" content="胡乱一气，乱说一通在我学生时代的时候，写作一直是我的诟病。因为我不爱看文学作品，不喜欢写日记，不喜欢动笔写作。但是我却很喜欢数学，物理，喜欢做逻辑题目，典型的理工男。因此，弄一个博客写作放在以前，我肯定是想都不会去想。 但是自从从事研发行业后，我渐渐发现了写作也不是那么无聊的事情。就是一种感觉，觉得写点东西能够抒发自己内心的情绪，能记录自己的成长。于是我开始着手搭建了自己的博客，希望自己能一个月一">
+<meta name="description" content="前言最近项目里有用到画廊效果来显示图片集合。于是乎，自己查了些资料写了一个画廊效果。实现画廊效果的方式有挺多了，但我没有一一尝试。在这里我选择比较容易实现的UICollectionView 分析实现画廊效果有两个比较重要的地方需要实现：  滚动的时候缩小和放大效果 实现page的滚动效果  实现滚动时缩小放大的layout实现实现缩小放大的效果需要重写UICollectionViewFlowLay">
 <meta name="keywords" content="iOS,blog">
 <meta property="og:type" content="article">
-<meta property="og:title" content="终于有了个人的独立博客">
-<meta property="og:url" content="http://yoursite.com/2017/11/27/终于有了个人的独立博客/index.html">
+<meta property="og:title" content="画廊效果的实现">
+<meta property="og:url" content="http://yoursite.com/2018/06/13/关于画廊效果实现的一个小技巧/index.html">
 <meta property="og:site_name" content="chw">
-<meta property="og:description" content="胡乱一气，乱说一通在我学生时代的时候，写作一直是我的诟病。因为我不爱看文学作品，不喜欢写日记，不喜欢动笔写作。但是我却很喜欢数学，物理，喜欢做逻辑题目，典型的理工男。因此，弄一个博客写作放在以前，我肯定是想都不会去想。 但是自从从事研发行业后，我渐渐发现了写作也不是那么无聊的事情。就是一种感觉，觉得写点东西能够抒发自己内心的情绪，能记录自己的成长。于是我开始着手搭建了自己的博客，希望自己能一个月一">
+<meta property="og:description" content="前言最近项目里有用到画廊效果来显示图片集合。于是乎，自己查了些资料写了一个画廊效果。实现画廊效果的方式有挺多了，但我没有一一尝试。在这里我选择比较容易实现的UICollectionView 分析实现画廊效果有两个比较重要的地方需要实现：  滚动的时候缩小和放大效果 实现page的滚动效果  实现滚动时缩小放大的layout实现实现缩小放大的效果需要重写UICollectionViewFlowLay">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-27T10:05:05.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/13/关于画廊效果实现的一个小技巧/1.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/13/关于画廊效果实现的一个小技巧/2.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/13/关于画廊效果实现的一个小技巧/3.gif">
+<meta property="og:image" content="http://yoursite.com/2018/06/13/关于画廊效果实现的一个小技巧/4.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/13/关于画廊效果实现的一个小技巧/5.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/13/关于画廊效果实现的一个小技巧/6.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/13/关于画廊效果实现的一个小技巧/7.gif">
+<meta property="og:updated_time" content="2018-06-14T06:54:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="终于有了个人的独立博客">
-<meta name="twitter:description" content="胡乱一气，乱说一通在我学生时代的时候，写作一直是我的诟病。因为我不爱看文学作品，不喜欢写日记，不喜欢动笔写作。但是我却很喜欢数学，物理，喜欢做逻辑题目，典型的理工男。因此，弄一个博客写作放在以前，我肯定是想都不会去想。 但是自从从事研发行业后，我渐渐发现了写作也不是那么无聊的事情。就是一种感觉，觉得写点东西能够抒发自己内心的情绪，能记录自己的成长。于是我开始着手搭建了自己的博客，希望自己能一个月一">
+<meta name="twitter:title" content="画廊效果的实现">
+<meta name="twitter:description" content="前言最近项目里有用到画廊效果来显示图片集合。于是乎，自己查了些资料写了一个画廊效果。实现画廊效果的方式有挺多了，但我没有一一尝试。在这里我选择比较容易实现的UICollectionView 分析实现画廊效果有两个比较重要的地方需要实现：  滚动的时候缩小和放大效果 实现page的滚动效果  实现滚动时缩小放大的layout实现实现缩小放大的效果需要重写UICollectionViewFlowLay">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/13/关于画廊效果实现的一个小技巧/1.png">
 
 
 
@@ -120,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/11/27/终于有了个人的独立博客/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/13/关于画廊效果实现的一个小技巧/"/>
 
 
 
 
 
-  <title>终于有了个人的独立博客 | chw</title>
+  <title>画廊效果的实现 | chw</title>
   
 
 
@@ -243,7 +251,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/27/终于有了个人的独立博客/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/13/关于画廊效果实现的一个小技巧/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chw">
@@ -260,7 +268,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">终于有了个人的独立博客</h1>
+          <h1 class="post-title" itemprop="name headline">画廊效果的实现</h1>
         
 
         <div class="post-meta">
@@ -272,8 +280,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T17:16:56+08:00">
-                2017-11-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-13T13:39:32+08:00">
+                2018-06-13
               </time>
             
 
@@ -310,10 +318,31 @@
       
 
       
-        <h2 id="胡乱一气，乱说一通"><a href="#胡乱一气，乱说一通" class="headerlink" title="胡乱一气，乱说一通"></a>胡乱一气，乱说一通</h2><p>在我学生时代的时候，写作一直是我的诟病。因为我不爱看文学作品，不喜欢写日记，不喜欢动笔写作。但是我却很喜欢数学，物理，喜欢做逻辑题目，典型的理工男。因此，弄一个博客写作放在以前，我肯定是想都不会去想。</p>
-<p>但是自从从事研发行业后，我渐渐发现了写作也不是那么无聊的事情。就是一种感觉，觉得写点东西能够抒发自己内心的情绪，能记录自己的成长。于是我开始着手搭建了自己的博客，希望自己能一个月一篇的出货量，一年一次工作成长总结（虽然不知道能不能做到）但是我就是这么想的于是也准备这样做了。搭建博客完成算是我的第一步，虽然没啥技术含量，但是我还是很开心！</p>
-<h2 id="博客搭建的技术参考"><a href="#博客搭建的技术参考" class="headerlink" title="博客搭建的技术参考"></a>博客搭建的技术参考</h2><p>我博客搭建是采用hexo + github + coding来的方式来做的。<br><strong>hexo</strong>是一款基于Node.js的静态博客框架；<br><strong>gitbub</strong>国外知名项目管理托管平台；<br><strong>coding</strong>国内知名项目托管平台。<br> 主要思路就是用<strong>hexo</strong>搭建静态本地静态博客后，将其部署到<strong>github</strong>和<strong>coding</strong>上面。</p>
-<p> 具体教程请参考它:<a href="http://www.jianshu.com/p/13e64c9e2295" target="_blank" rel="external">Mac上搭建基于GitHub的Hexo博客</a></p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近项目里有用到画廊效果来显示图片集合。于是乎，自己查了些资料写了一个画廊效果。实现画廊效果的方式有挺多了，但我没有一一尝试。在这里我选择比较容易实现的UICollectionView</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>实现画廊效果有两个比较重要的地方需要实现：</p>
+<ol>
+<li>滚动的时候缩小和放大效果</li>
+<li>实现page的滚动效果</li>
+</ol>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h3 id="滚动时缩小放大的layout实现"><a href="#滚动时缩小放大的layout实现" class="headerlink" title="滚动时缩小放大的layout实现"></a>滚动时缩小放大的layout实现</h3><p>实现缩小放大的效果需要重写UICollectionViewFlowLayout里的layoutAttributesForElementsInRect的方法和shoudInvalidateLayoutForBoundsChange的方法。在这里可以设计一个类继承与UICollectionViewFlowLayout并重写这两个方法。</p>
+<p>1.shoudInvalidateLayoutForBoundsChange方法的作用一旦显示区域发生变化就会实时调用layoutAttributesForElementsInRect(至于其它的方法我没细究)。</p>
+<p>2.layoutAttributesForElementsInRect的方法的作用重新设置cell的相关布局属性。</p>
+<p>layoutAttributesForElementsInRect方法是实现画廊效果的关键方法之一，里面需要实现滚动动画。在这里我们可以设置下放大的比例参数与滚动的cell中心位置距离collectionView的中心位置的参数。前者控制放大的比例，后者控制滚动的时候缩放的有效距离。计算公式如下：</p>
+<p>缩放因子： scaleFactor，有效距离：distance ，缩放值：scale，当前cell中心距离collectionView的中心的值：cellDistance （这个值取绝对值）<br><br>公式：scale = 1 + scaleFactor * (1 - cellDistance/distance)，其中: 0 &lt;=  cellDistance/distance &lt;= 1 可以推导出 1 &lt;= scale &lt;= 1 +  scaleFactor;</p>
+<p><br>以上公式就是我们实现滚动缩放的关键公式，具体的代码如下：<br><img src="/2018/06/13/关于画廊效果实现的一个小技巧/1.png" alt=""></p>
+<p>这样负责处理滚动动画的layout就完成了，结下我们需要根据这个layout初始化一个collectionView。</p>
+<h3 id="layout初始化一个collectionView"><a href="#layout初始化一个collectionView" class="headerlink" title="layout初始化一个collectionView"></a>layout初始化一个collectionView</h3><p>这个步骤我们需要设置下laout的参数以达到画廊静态效果，详细分析如下图：<br><img src="/2018/06/13/关于画廊效果实现的一个小技巧/2.png" alt=""></p>
+<p>根据上述的分析就可以实现一个带画廊动画的layout的collectionView，详细的效果如下：</p>
+<p><img src="/2018/06/13/关于画廊效果实现的一个小技巧/3.gif" alt=""></p>
+<p>可以发现我们还剩最后一个比较关键的效果还没实现，就是page效果</p>
+<p>###为画廊动画添加一个page滚动效果<br>我们可以重写targetContentOffsetForProposedContentOffset的方法来实现，让每次即将停止的时候停在离当前中心点最近的cell。这样做效果是可以做出来，但是无法达到理想效果。因此在滚动减速的时候会出现缓慢移动到目标位置的现象。</p>
+<p>在这里介绍一种比较符合page效果的做法。这个做法比较特殊和聪明。它在collectionView上面有加了一层scrollerView，然后设置scrollerView的pagingEnabled为YES。<br>可能这里会提出问题说为什么不用collectionView自己的pagingEnabled，这问题试一下分析一下就知道了，这里不多做讨论。</p>
+<p>为collectionView加一层scrollerView的话需要分析这个scrollerView的frme和contentSize这两个属性。具体分析如下<br><img src="/2018/06/13/关于画廊效果实现的一个小技巧/4.png" alt=""></p>
+<p>接着将设置下scrollerView的滚动代理并实现scrollViewDidScroll，具体代码如下<br><img src="/2018/06/13/关于画廊效果实现的一个小技巧/5.png" alt=""></p>
+<p>根据上面的分析图可以看出scrollerView的宽度并不是覆盖整个collectionView，如果滚动手势不在scrollerView的范围内，则会无法触发scrollerView的滚动。因此，这里需要对手势事件进行转移，具体做法如下<br><img src="/2018/06/13/关于画廊效果实现的一个小技巧/6.png" alt=""><br>通过上述代码将不在scorllView里但在collectionView里的滚动手势转移给scorllView处理。</p>
+<p>最后完成的效果如下图：</p>
+<p><img src="/2018/06/13/关于画廊效果实现的一个小技巧/7.gif" alt=""></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>此处让我觉得很聪明的做法就是使用scrollView的pagingEnabled设为YES，并与collectionView做滚动关联来实现系统原生的page滚动动画效果。这个方法实现起来不难，难在你能想到这个方法，很佩服能想出此种方法的人。这种思考方式值得学习。</p>
 
       
     </div>
@@ -338,15 +367,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/05/29/自定义全屏转场动画/" rel="next" title="自定义全屏转场动画">
+                <i class="fa fa-chevron-left"></i> 自定义全屏转场动画
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/18/2017-12-18/" rel="prev" title="iOS 关于app后台任务的问题">
-                iOS 关于app后台任务的问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -480,7 +509,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#胡乱一气，乱说一通"><span class="nav-number">1.</span> <span class="nav-text">胡乱一气，乱说一通</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博客搭建的技术参考"><span class="nav-number">2.</span> <span class="nav-text">博客搭建的技术参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现"><span class="nav-number">3.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#滚动时缩小放大的layout实现"><span class="nav-number">3.0.1.</span> <span class="nav-text">滚动时缩小放大的layout实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#layout初始化一个collectionView"><span class="nav-number">3.0.2.</span> <span class="nav-text">layout初始化一个collectionView</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

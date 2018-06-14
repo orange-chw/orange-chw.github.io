@@ -243,6 +243,150 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/13/关于画廊效果实现的一个小技巧/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chw">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/myheader.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chw">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/13/关于画廊效果实现的一个小技巧/" itemprop="url">画廊效果的实现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-13T13:39:32+08:00">
+                2018-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近项目里有用到画廊效果来显示图片集合。于是乎，自己查了些资料写了一个画廊效果。实现画廊效果的方式有挺多了，但我没有一一尝试。在这里我选择比较容易实现的UICollectionView</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>实现画廊效果有两个比较重要的地方需要实现：</p>
+<ol>
+<li>滚动的时候缩小和放大效果</li>
+<li>实现page的滚动效果</li>
+</ol>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h3 id="滚动时缩小放大的layout实现"><a href="#滚动时缩小放大的layout实现" class="headerlink" title="滚动时缩小放大的layout实现"></a>滚动时缩小放大的layout实现</h3><p>实现缩小放大的效果需要重写UICollectionViewFlowLayout里的layoutAttributesForElementsInRect的方法和shoudInvalidateLayoutForBoundsChange的方法。在这里可以设计一个类继承与UICollectionViewFlowLayout并重写这两个方法。</p>
+<p>1.shoudInvalidateLayoutForBoundsChange方法的作用一旦显示区域发生变化就会实时调用layoutAttributesForElementsInRect(至于其它的方法我没细究)。</p>
+<p>2.layoutAttributesForElementsInRect的方法的作用重新设置cell的相关布局属性。</p>
+<p>layoutAttributesForElementsInRect方法是实现画廊效果的关键方法之一，里面需要实现滚动动画。在这里我们可以设置下放大的比例参数与滚动的cell中心位置距离collectionView的中心位置的参数。前者控制放大的比例，后者控制滚动的时候缩放的有效距离。计算公式如下：</p>
+<p>缩放因子： scaleFactor，有效距离：distance ，缩放值：scale，当前cell中心距离collectionView的中心的值：cellDistance （这个值取绝对值）<br><br>公式：scale = 1 + scaleFactor * (1 - cellDistance/distance)，其中: 0 &lt;=  cellDistance/distance &lt;= 1 可以推导出 1 &lt;= scale &lt;= 1 +  scaleFactor;</p>
+<p><br>以上公式就是我们实现滚动缩放的关键公式，具体的代码如下：<br><img src="/2018/06/13/关于画廊效果实现的一个小技巧/1.png" alt=""></p>
+<p>这样负责处理滚动动画的layout就完成了，结下我们需要根据这个layout初始化一个collectionView。</p>
+<h3 id="layout初始化一个collectionView"><a href="#layout初始化一个collectionView" class="headerlink" title="layout初始化一个collectionView"></a>layout初始化一个collectionView</h3><p>这个步骤我们需要设置下laout的参数以达到画廊静态效果，详细分析如下图：<br><img src="/2018/06/13/关于画廊效果实现的一个小技巧/2.png" alt=""></p>
+<p>根据上述的分析就可以实现一个带画廊动画的layout的collectionView，详细的效果如下：</p>
+<p><img src="/2018/06/13/关于画廊效果实现的一个小技巧/3.gif" alt=""></p>
+<p>可以发现我们还剩最后一个比较关键的效果还没实现，就是page效果</p>
+<p>###为画廊动画添加一个page滚动效果<br>我们可以重写targetContentOffsetForProposedContentOffset的方法来实现，让每次即将停止的时候停在离当前中心点最近的cell。这样做效果是可以做出来，但是无法达到理想效果。因此在滚动减速的时候会出现缓慢移动到目标位置的现象。</p>
+<p>在这里介绍一种比较符合page效果的做法。这个做法比较特殊和聪明。它在collectionView上面有加了一层scrollerView，然后设置scrollerView的pagingEnabled为YES。<br>可能这里会提出问题说为什么不用collectionView自己的pagingEnabled，这问题试一下分析一下就知道了，这里不多做讨论。</p>
+<p>为collectionView加一层scrollerView的话需要分析这个scrollerView的frme和contentSize这两个属性。具体分析如下<br><img src="/2018/06/13/关于画廊效果实现的一个小技巧/4.png" alt=""></p>
+<p>接着将设置下scrollerView的滚动代理并实现scrollViewDidScroll，具体代码如下<br><img src="/2018/06/13/关于画廊效果实现的一个小技巧/5.png" alt=""></p>
+<p>根据上面的分析图可以看出scrollerView的宽度并不是覆盖整个collectionView，如果滚动手势不在scrollerView的范围内，则会无法触发scrollerView的滚动。因此，这里需要对手势事件进行转移，具体做法如下<br><img src="/2018/06/13/关于画廊效果实现的一个小技巧/6.png" alt=""><br>通过上述代码将不在scorllView里但在collectionView里的滚动手势转移给scorllView处理。</p>
+<p>最后完成的效果如下图：</p>
+<p><img src="/2018/06/13/关于画廊效果实现的一个小技巧/7.gif" alt=""></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>此处让我觉得很聪明的做法就是使用scrollView的pagingEnabled设为YES，并与collectionView做滚动关联来实现系统原生的page滚动动画效果。这个方法实现起来不难，难在你能想到这个方法，很佩服能想出此种方法的人。这种思考方式值得学习。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/29/自定义全屏转场动画/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -834,7 +978,7 @@ if ([[UIDevice currentDevice].systemVersion floatValue] &gt; 9.0) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
